@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-i = ord('a')
-while i <= ord('z'):
-    print(chr(i), end='')
-    i += 1
+alphabet = ''
+for i in range(ord('a'), ord('z') + 1):
+    alphabet += chr(i)
+print(alphabet, end='')
