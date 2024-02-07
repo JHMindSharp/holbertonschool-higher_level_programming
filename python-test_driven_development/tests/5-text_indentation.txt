@@ -1,0 +1,23 @@
+>>> text_indentation = __import__('5-text_indentation').text_indentation
+>>> s = io.StringIO()
+>>> with contextlib.redirect_stdout(s):
+...     text_indentation("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quonam modo?")
+>>> print(s.getvalue())
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.$
+$
+Quonam modo?$
+$
+>>> s = io.StringIO()
+>>> with contextlib.redirect_stdout(s):
+...     text_indentation("Hello? How are you: I am fine.")
+>>> print(s.getvalue())
+Hello?$
+$
+How are you:$
+$
+I am fine.$
+$
+>>> text_indentation(12)
+Traceback (most recent call last):
+    ...
+TypeError: text must be a string
