@@ -18,7 +18,8 @@ def matrix_divided(matrix, div):
     - A new matrix with each element divided by div,
     rounded to 2 decimal places.
     """
-
+    if not matrix:
+        return []
     if not all(isinstance(row, list) for row in matrix) or not matrix:
         raise TypeError("matrix must be a matrix (list of lists) "
                         "of integers/floats")
