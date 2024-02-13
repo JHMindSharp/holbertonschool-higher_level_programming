@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""Adds a public instance method to BaseGeometry."""
+
+
 class BaseGeometry:
     """Class BaseGeometry with public instance method."""
     def area(self):

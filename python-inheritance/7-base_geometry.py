@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""Adds validation method to BaseGeometry class."""
+
+
 class BaseGeometry:
     """Class BaseGeometry with public instance methods."""
     def area(self):

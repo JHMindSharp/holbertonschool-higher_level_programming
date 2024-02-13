@@ -1,5 +1,9 @@
 #!/usr/bin/python3
+"""Expands Rectangle with area method and __str__."""
+
+
 BaseGeometry = __import__('7-base_geometry').BaseGeometry
+
 
 class Rectangle(BaseGeometry):
     """Rectangle that inherits from BaseGeometry."""
