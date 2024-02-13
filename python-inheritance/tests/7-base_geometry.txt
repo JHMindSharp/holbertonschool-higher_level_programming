@@ -1,15 +1,35 @@
 >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
 >>> bg = BaseGeometry()
+
+# Test for the area method
 >>> bg.area()
 Traceback (most recent call last):
     ...
 Exception: area() is not implemented
+
+# Test integer_validator with valid integers
 >>> bg.integer_validator("my_int", 12)
 >>> bg.integer_validator("width", 89)
+
+# Test integer_validator with invalid types
 >>> bg.integer_validator("name", "John")
 Traceback (most recent call last):
     ...
 TypeError: name must be an integer
+>>> bg.integer_validator("list", [1, 2, 3])
+Traceback (most recent call last):
+    ...
+TypeError: list must be an integer
+>>> bg.integer_validator("tuple", (1, 2))
+Traceback (most recent call last):
+    ...
+TypeError: tuple must be an integer
+>>> bg.integer_validator("dict", {"key": 3})
+Traceback (most recent call last):
+    ...
+TypeError: dict must be an integer
+
+# Test integer_validator with zero and negative numbers
 >>> bg.integer_validator("age", 0)
 Traceback (most recent call last):
     ...
@@ -18,22 +38,26 @@ ValueError: age must be greater than 0
 Traceback (most recent call last):
     ...
 ValueError: distance must be greater than 0
->>> bg.integer_validator("positive", 1)
->>> bg.integer_validator("large_number", 1000000)
->>> bg.integer_validator("name_with_space", 20)
->>> bg.integer_validator("negative_string", "-20")
-Traceback (most recent call last):
-    ...
-TypeError: negative_string must be an integer
+
+# Test integer_validator with floating-point numbers
 >>> bg.integer_validator("float", 1.1)
 Traceback (most recent call last):
     ...
 TypeError: float must be an integer
->>> bg.integer_validator("large_negative", -1000000)
+>>> bg.integer_validator("negative_float", -1.1)
 Traceback (most recent call last):
     ...
-ValueError: large_negative must be greater than 0
->>> bg.integer_validator("zero_string", "0")
+TypeError: negative_float must be an integer
+
+# Test integer_validator with boolean
+>>> bg.integer_validator("boolean_true", True)
 Traceback (most recent call last):
     ...
-TypeError: zero_string must be an integer
+TypeError: boolean_true must be an integer
+>>> bg.integer_validator("boolean_false", False)
+Traceback (most recent call last):
+    ...
+TypeError: boolean_false must be an integer
+
+# Test integer_validator with very large integer
+>>> bg.integer_validator("large_int", 99999999999999999999999999999999999999)
