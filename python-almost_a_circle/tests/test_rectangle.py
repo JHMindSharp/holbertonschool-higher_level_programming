@@ -36,10 +36,31 @@ class TestRectangle(unittest.TestCase):
 
         with self.assertRaises(TypeError):
             r.width = "hello"
+        with self.assertRaises(TypeError):
             r.height = "world"
         with self.assertRaises(ValueError):
             r.width = -10
+        with self.assertRaises(ValueError):
             r.height = -5
+
+    def test_invalid_initialization(self):
+        """Test initialization with invalid values."""
+        with self.assertRaises(TypeError):
+            Rectangle("10", 2)
+        with self.assertRaises(ValueError):
+            Rectangle(-10, 2)
+        with self.assertRaises(TypeError):
+            Rectangle(10, "2")
+        with self.assertRaises(ValueError):
+            Rectangle(10, -2)
+        with self.assertRaises(TypeError):
+            Rectangle(10, 2, "0", 0)
+        with self.assertRaises(ValueError):
+            Rectangle(10, 2, -1, 0)
+        with self.assertRaises(TypeError):
+            Rectangle(10, 2, 0, "0")
+        with self.assertRaises(ValueError):
+            Rectangle(10, 2, 0, -1)
 
     def test_x_y(self):
         """Test x and y setter/getter."""
@@ -54,9 +75,11 @@ class TestRectangle(unittest.TestCase):
 
         with self.assertRaises(TypeError):
             r.x = "hello"
+        with self.assertRaises(TypeError):
             r.y = "world"
         with self.assertRaises(ValueError):
             r.x = -5
+        with self.assertRaises(ValueError):
             r.y = -10
 
     def test_area(self):
@@ -70,20 +93,30 @@ class TestRectangle(unittest.TestCase):
         r3 = Rectangle(8, 7, 0, 0, 12)
         self.assertEqual(r3.area(), 56)
 
+    def test_display_with_xy(self):
+        """Test the display method with x and y offsets."""
+        r = Rectangle(2, 3, 2, 2)
+        expected_output = "\n\n" + (" " * 2 + "#" * 2 + "\n") * 3
+        with unittest.mock.patch('sys.stdout',
+                                 new_callable=io.StringIO) as mock_stdout:
+            r.display()
+            self.assertEqual(mock_stdout.getvalue(), expected_output)
+
     def test_display(self):
         """Test display method."""
         r1 = Rectangle(4, 6)
-        expected_output = "####\n####\n####\n####\n####\n####"
-        with unittest.mock.patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+        expected_output = "####\n" * 6
+        with unittest.mock.patch('sys.stdout',
+                                 new_callable=io.StringIO) as mock_stdout:
             r1.display()
-            self.assertEqual(mock_stdout.getvalue().strip(), expected_output)
+            self.assertEqual(mock_stdout.getvalue(), expected_output)
 
         r2 = Rectangle(2, 2)
-        expected_output = "##\n##"
-        with unittest.mock.patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+        expected_output = "##\n" * 2
+        with unittest.mock.patch('sys.stdout',
+                                 new_callable=io.StringIO) as mock_stdout:
             r2.display()
-            self.assertEqual(mock_stdout.getvalue().strip(), expected_output)
-
+            self.assertEqual(mock_stdout.getvalue(), expected_output)
 
 
 if __name__ == '__main__':
