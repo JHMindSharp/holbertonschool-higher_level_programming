@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 import unittest
+import io
+import unittest.mock
 from models.rectangle import Rectangle
 
 
@@ -67,6 +69,21 @@ class TestRectangle(unittest.TestCase):
 
         r3 = Rectangle(8, 7, 0, 0, 12)
         self.assertEqual(r3.area(), 56)
+
+    def test_display(self):
+        """Test display method."""
+        r1 = Rectangle(4, 6)
+        expected_output = "####\n####\n####\n####\n####\n####"
+        with unittest.mock.patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            r1.display()
+            self.assertEqual(mock_stdout.getvalue().strip(), expected_output)
+
+        r2 = Rectangle(2, 2)
+        expected_output = "##\n##"
+        with unittest.mock.patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            r2.display()
+            self.assertEqual(mock_stdout.getvalue().strip(), expected_output)
+
 
 
 if __name__ == '__main__':
