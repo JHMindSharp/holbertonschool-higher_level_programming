@@ -118,6 +118,14 @@ class TestRectangle(unittest.TestCase):
             r2.display()
             self.assertEqual(mock_stdout.getvalue(), expected_output)
 
+    def test_str(self):
+        """Test the __str__ method."""
+        r = Rectangle(4, 6, 2, 1, 99)
+        self.assertEqual(str(r), "[Rectangle] (99) 2/1 - 4/6")
+
+        r = Rectangle(2, 2)
+        self.assertEqual(str(r), "[Rectangle] (1) 0/0 - 2/2")
+
 
 if __name__ == '__main__':
     unittest.main()
