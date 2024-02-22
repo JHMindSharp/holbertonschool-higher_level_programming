@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """Module initiate a Base class"""
+import json
 
 
 class Base:
@@ -18,3 +19,10 @@ class Base:
         else:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
+
+    @staticmethod
+    def to_json_string(list_dictionaries):
+        """Return the representation JSON of a dictionnary list."""
+        if list_dictionaries is None or len(list_dictionaries) == 0:
+            return "[]"
+        return json.dumps(list_dictionaries)
