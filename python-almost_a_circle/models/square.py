@@ -19,3 +19,9 @@ class Square(Rectangle):
             id (_type_, optional): _description_. Defaults to None.
         """
         super().__init__(size, size, x, y, id)
+
+    def __str__(self):
+        """_summary_
+        """
+        return "[Square] ({}) {}/{} - {}".format(self.id, self.x,
+                                                 self.y, self.width)
