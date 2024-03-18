@@ -1,3 +1,3 @@
--- List all tables in the specified database
-USE hbtn_0c_0;
+-- Liste toutes les tables d'une base de données
+USE mysql;
 SHOW TABLES;
